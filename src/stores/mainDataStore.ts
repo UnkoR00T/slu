@@ -25,10 +25,10 @@ export const useMainData = defineStore('main', () => {
       organizer: '',
       games: '',
       place: '',
-      date: new Date().toDateString(),
+      date: '2000-01-01',
       game_number: 0,
-      start: '16:00',
-      end: '17:00',
+      start: '',
+      end: '',
     },
   })
 
@@ -136,7 +136,10 @@ export const useMainData = defineStore('main', () => {
   data.load().then(res => {
     console.log("Loaded data!")
   }).catch(err => {
-    alert(err);
+    alert(err + ". Generating!");
+    data.save().then(() => {
+      console.log("Generated and saved blank info!");
+    })
   })
 
   return { tempStorage, data, goals, fouls }

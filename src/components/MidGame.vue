@@ -35,7 +35,8 @@ const addFoul = () => {
   const starts = prompt("Starts", "16:00");
   const code = prompt("Code", "-");
 
-  mainDataStore.fouls.add(team, playerId, time, code, starts).then(() => {
+  mainDataStore.fouls.add(team, playerId, time, code, starts).then((index) => {
+    console.log(index);
     mainDataStore.data.save();
   }).catch((err) => {
     alert(err);
