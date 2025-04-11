@@ -15,7 +15,7 @@ const hostTeamPlayers: Ref<playerType[]> = ref([]);
 const guestTeamPlayers: Ref<playerType[]> = ref([]);
 const hostTeamTrainers: Ref<string[]> = ref([]);
 const guestTeamTrainers: Ref<string[]> = ref([]);
-mainDataStore.load().then((res) => {
+mainDataStore.data.load().then((res) => {
   hostTeamName.value = res.hostTeam.name;
   guestTeamName.value = res.guestTeam.name;
 
@@ -37,7 +37,7 @@ const save = async () => {
     mainDataStore.tempStorage.hostTeam.trainers = hostTeamTrainers.value;
     mainDataStore.tempStorage.guestTeam.trainers = guestTeamTrainers.value;
 
-    await mainDataStore.save();
+    await mainDataStore.data.save();
     alert("Saved")
   }catch(e){
     alert("Error: " + e);
