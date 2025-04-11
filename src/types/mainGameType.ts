@@ -6,13 +6,15 @@ class mainGameType {
     name: "",
     players: [],
     trainers: [],
-    goals: []
+    goals: [],
+    fouls: []
   }
   guestTeam: teamType = {
     name: "",
     players: [],
     trainers: [],
-    goals: []
+    goals: [],
+    fouls: []
   }
   gameInfo: gameInfoType = {
     organizer: "",

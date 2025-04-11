@@ -3,6 +3,7 @@ import { mainGameType } from '@/types/mainGameType.ts'
 import { ref, type Ref } from 'vue'
 import type { teamType } from '@/types/teamType.ts'
 import type { goalType } from '@/types/goalType.ts'
+import type { foulType } from '@/types/foulType.ts'
 
 export const useMainData = defineStore('main', () => {
   const tempStorage: Ref<mainGameType> = ref({
@@ -11,12 +12,14 @@ export const useMainData = defineStore('main', () => {
       players: [],
       trainers: [],
       goals: [],
+      fouls: []
     },
     hostTeam: {
       name: '',
       players: [],
       trainers: [],
       goals: [],
+      fouls: []
     },
     gameInfo: {
       organizer: '',
@@ -28,20 +31,67 @@ export const useMainData = defineStore('main', () => {
       end: '17:00',
     },
   })
-  const goals = {
-    add: (team: number, playerId: number, assistId: number, time: string, code: string) => {
-      const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam
-      const goal: goalType = {
-        playerId: playerId,
-        assistId: assistId,
-        time: time,
-        code: code,
-      }
-      target.goals.push(goal)
+
+  const fouls = {
+    add: (team: number, playerId: number, time: number, code: string, starts: string): Promise<number> => {
+      return new Promise<number>((resolve, reject) => {
+        if (team != 1 && team != 2) reject(`Team: ${team} isnt supported. Team should be 1 (hosts) or 2 (guests).`);
+        const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam;
+        if (!target) reject(`Failed to fetch target team.`);
+        const foul: foulType = {
+          playerId: playerId,
+          time: time,
+          code: code,
+          start: starts,
+          end: "",
+        }
+        const index = target.fouls.push(foul);
+        resolve(index);
+      })
     },
-    remove: (team: number, goalIndex: number) => {
-      const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam;
-      target.goals = target.goals.filter((x, i) => i !== goalIndex);
+    endFoul: (team: number, foulIndex: number, ends: string): Promise<void> => {
+      return new Promise<void>((resolve, reject) => {
+        if (team != 1 && team != 2) reject(`Team: ${team} isnt supported. Team should be 1 (hosts) or 2 (guests).`);
+        const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam;
+        if (!target) reject(`Failed to fetch target team.`);
+        if (!target.fouls[foulIndex]) reject(`Foul index is out of bounds.`);
+        target.fouls[foulIndex].end = ends;
+        resolve();
+      })
+    },
+    remove: (team: number, foulIndex: number): Promise<void> => {
+      return new Promise<void>((resolve, reject) => {
+        if (team != 1 && team != 2) reject(`Team: ${team} isnt supported. Team should be 1 (hosts) or 2 (guests).`);
+        const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam;
+        if (!target) reject(`Failed to fetch target team.`);
+        if (!target.fouls[foulIndex]) reject(`Foul index is out of bounds.`);
+        delete(target.fouls[foulIndex]);
+        resolve();
+      })
+    }
+  }
+  const goals = {
+    add: (team: number, playerId: number, assistId: number, time: string, code: string): Promise<number> => {
+      return new Promise<number>((resolve, reject) => {
+        if (team != 1 && team != 2) reject(`Team: ${team} isnt supported. Team should be 1 (hosts) or 2 (guests).`);
+        const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam
+        const goal: goalType = {
+          playerId: playerId,
+          assistId: assistId,
+          time: time,
+          code: code,
+        }
+        const index = target.goals.push(goal)
+        resolve(index);
+      })
+    },
+    remove: (team: number, goalIndex: number): Promise<void> => {
+      return new Promise<void>((resolve, reject) => {
+        const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam;
+        if(goalIndex >= target.goals.length) reject("Given goal index is out of bounds");
+        target.goals = target.goals.filter((x, i) => i !== goalIndex);
+        resolve();
+      })
     },
   }
   const data = {
@@ -65,6 +115,22 @@ export const useMainData = defineStore('main', () => {
         reject('Failed to load main data')
       })
     },
+    download: (): Promise<void> => {
+      return new Promise<void>((resolve, reject) => {
+        const jsonString = JSON.stringify(tempStorage.value, null, 2);
+        const blob = new Blob([jsonString], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = tempStorage.value.gameInfo.game_number + "_" + tempStorage.value.gameInfo.organizer + ".json"; // Desired file name
+        document.body.appendChild(a); // Required for Firefox
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        resolve();
+      })
+    }
   }
 
   data.load().then(res => {
@@ -73,5 +139,5 @@ export const useMainData = defineStore('main', () => {
     alert(err);
   })
 
-  return { tempStorage, data, goals }
+  return { tempStorage, data, goals, fouls }
 })

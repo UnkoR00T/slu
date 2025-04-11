@@ -11,21 +11,49 @@ const newGoal = () => {
   const time = prompt("Time", "16:00");
   const code = prompt("Code", "-");
 
-  mainDataStore.goals.add(team, playerId, assistId, time, code);
-  mainDataStore.data.save();
+  mainDataStore.goals.add(team, playerId, assistId, time, code).then(() => {
+    mainDataStore.data.save();
+  }).catch((err) => {
+    alert(err);
+  });
 }
 const rmGoal = () => {
   const team = Number.parseInt(prompt("Team (1/2)", "-1"));
   const goalId = Number.parseInt(prompt("Goal id", "-1"));
 
-  mainDataStore.goals.remove(team, goalId);
-  mainDataStore.data.save();
+  mainDataStore.goals.remove(team, goalId).then(() => {
+    mainDataStore.data.save();
+  }).catch((err) => {
+    alert(err);
+  });
+}
+
+const addFoul = () => {
+  const team = Number.parseInt(prompt("Team (1/2)", "-1"));
+  const playerId = Number.parseInt(prompt("Player Id", "-1"));
+  const time = prompt("Time", "2");
+  const starts = prompt("Starts", "16:00");
+  const code = prompt("Code", "-");
+
+  mainDataStore.fouls.add(team, playerId, time, code, starts).then(() => {
+    mainDataStore.data.save();
+  }).catch((err) => {
+    alert(err);
+  });
 }
 </script>
 
 <template>
-  <h1 @click="newGoal()">Mid Game</h1>
-  <h1 @click="rmGoal()">Rm</h1>
+  <h1>Mid Game</h1>
+  <div class="teamSeparator flex">
+    <div class="goals">
+      <p @click="newGoal()">Add goal</p>
+      <p @click="rmGoal()">Remove goal</p>
+    </div>
+    <div class="fouls">
+      <p @click="addFoul()">Add foul</p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
