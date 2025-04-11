@@ -41,7 +41,7 @@ export const useMainData = defineStore('main', () => {
     },
     remove: (team: number, goalIndex: number) => {
       const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam;
-      target.goals = target.goals.filter((x, i) => i == goalIndex);
+      target.goals = target.goals.filter((x, i) => i !== goalIndex);
     },
   }
   const data = {
@@ -66,6 +66,12 @@ export const useMainData = defineStore('main', () => {
       })
     },
   }
+
+  data.load().then(res => {
+    console.log("Loaded data!")
+  }).catch(err => {
+    alert(err);
+  })
 
   return { tempStorage, data, goals }
 })
