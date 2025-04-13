@@ -71,27 +71,28 @@ export const useMainData = defineStore('main', () => {
     }
   }
   const goals = {
-    add: (team: number, playerId: number, assistId: number, time: string, code: string): Promise<number> => {
+    add: (team: number, playerId: number, assistId: number | 'none', time: string, code: string): Promise<number> => {
       return new Promise<number>((resolve, reject) => {
-        if (team != 1 && team != 2) reject(`Team: ${team} isnt supported. Team should be 1 (hosts) or 2 (guests).`);
-        const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam
+        if (team != 1 && team != 2) reject(`Team: ${team} isn't supported. Team should be 1 (hosts) or 2 (guests).`);
+        const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam;
         const goal: goalType = {
+          goalNumber: target.goals.length,
           playerId: playerId,
           assistId: assistId,
           time: time,
           code: code,
-        }
-        const index = target.goals.push(goal)
+        };
+        const index = target.goals.push(goal);
         resolve(index);
-      })
+      });
     },
     remove: (team: number, goalIndex: number): Promise<void> => {
       return new Promise<void>((resolve, reject) => {
         const target: teamType = team == 1 ? tempStorage.value.hostTeam : tempStorage.value.guestTeam;
-        if(goalIndex >= target.goals.length) reject("Given goal index is out of bounds");
+        if (goalIndex >= target.goals.length) reject("Given goal index is out of bounds");
         target.goals = target.goals.filter((x, i) => i !== goalIndex);
         resolve();
-      })
+      });
     },
   }
   const data = {
