@@ -1,6 +1,6 @@
 <script setup lang="ts">
-
 import { useMainData } from '@/stores/mainDataStore.ts'
+import { mainGameType } from '@/types/mainGameType.ts'
 import { ref, type Ref } from 'vue'
 import type { goalType } from '@/types/goalType.ts'
 
@@ -18,13 +18,24 @@ const guestPlayers = ref(mainDataStore.tempStorage.guestTeam.players);
 let hostGoalCounter = 1;
 let guestGoalCounter = 1;
 
+mainDataStore.data.load().then((res: mainGameType) => {
+  hostTeamGoals.value = res.hostTeam.goals;
+  guestTeamGoals.value = res.guestTeam.goals;
+
+  hostPlayers.value = res.hostTeam.players;
+  guestPlayers.value = res.guestTeam.players;
+
+  hostGoalCounter = res.hostTeam.goals.length;
+  guestGoalCounter = res.guestTeam.goals.length;
+})
+
 const addGoal = (team: number) => {
   const newGoal: goalType = {
     goalNumber: team === 1 ? hostGoalCounter++ : guestGoalCounter++,
     playerId: -1,
     assistId: 'none',
     time: "",
-    code: "",
+    code: "NONE",
   };
 
   if (team === 1) {
@@ -103,26 +114,27 @@ const clear = () => {
             Delete
           </button>
           <div v-if="editGoalTeam === 1 && editGoalIndex === index">
-            <input 
-              type="text" 
-              v-model="goal.time" 
-              placeholder="Time" 
+            <input
+              type="text"
+              v-model="goal.time"
+              placeholder="Time"
             />
-            
+
             <select v-model="goal.playerId" class="border mr-2">
               <option v-for="player in hostPlayers" :key="player.number" :value="player.number">
-                {{ player.number }}
+                {{ player.number }} - {{player.name}}
               </option>
             </select>
 
             <select v-model="goal.assistId" class="border mr-2">
               <option v-for="player in hostPlayers" :key="player.number" :value="player.number">
-                {{ player.number }}
+                {{ player.number }} - {{player.name}}
               </option>
               <option value="none">Brak</option>
             </select>
 
             <select v-model="goal.code" class="border mr-2">
+              <option value="NONE" selected>Brak</option>
               <option value="PP">PP - Gra w przewadze</option>
               <option value="SH">SH - Gra w osłabieniu</option>
               <option value="ESH">ESH - Obustronna gra w osłabieniu</option>
@@ -144,14 +156,14 @@ const clear = () => {
             />
           </div>
           <div v-else>
-            Goal: {{ goal.goalNumber }}, 
-            Player: {{ goal.playerId }}, 
-            Assist: {{ goal.assistId === 'none' ? 'None' : goal.assistId }}, 
-            Time: {{ goal.time }}, 
+            Goal: {{ goal.goalNumber }},
+            Player: {{ goal.playerId }},
+            Assist: {{ goal.assistId === 'none' ? 'None' : goal.assistId }},
+            Time: {{ goal.time }},
             Code: {{ goal.code === 'custom' ? goal.customCode : goal.code }}
           </div>
         </li>
-        <li><button @click="addGoal(1)">+ Add Goal</button></li>
+        <li><button @click="addGoal(1)" class="textInteractable" style="color: blue;">+ Add Goal</button></li>
       </ul>
 
       <h2>Guest Team Goals</h2>
@@ -168,26 +180,27 @@ const clear = () => {
             Delete
           </button>
           <div v-if="editGoalTeam === 2 && editGoalIndex === index">
-            <input 
-              type="text" 
-              v-model="goal.time" 
-              placeholder="Time" 
+            <input
+              type="text"
+              v-model="goal.time"
+              placeholder="Time"
             />
-            
+
             <select v-model="goal.playerId" class="border mr-2">
               <option v-for="player in guestPlayers" :key="player.number" :value="player.number">
-                {{ player.number }}
+                {{ player.number }} - {{player.name}}
               </option>
             </select>
 
             <select v-model="goal.assistId" class="border mr-2">
               <option v-for="player in guestPlayers" :key="player.number" :value="player.number">
-                {{ player.number }}
+                {{ player.number }} - {{player.name}}
               </option>
               <option value="none">Brak</option>
             </select>
 
             <select v-model="goal.code" class="border mr-2">
+              <option value="NONE" selected>Brak</option>
               <option value="PP">PP - Gra w przewadze</option>
               <option value="SH">SH - Gra w osłabieniu</option>
               <option value="ESH">ESH - Obustronna gra w osłabieniu</option>
@@ -209,14 +222,14 @@ const clear = () => {
             />
           </div>
           <div v-else>
-            Goal: {{ goal.goalNumber }}, 
-            Player: {{ goal.playerId }}, 
-            Assist: {{ goal.assistId === 'none' ? 'None' : goal.assistId }}, 
-            Time: {{ goal.time }}, 
+            Goal: {{ goal.goalNumber }},
+            Player: {{ goal.playerId }},
+            Assist: {{ goal.assistId === 'none' ? 'None' : goal.assistId }},
+            Time: {{ goal.time }},
             Code: {{ goal.code === 'custom' ? goal.customCode : goal.code }}
           </div>
         </li>
-        <li><button @click="addGoal(2)">+ Add Goal</button></li>
+        <li><button @click="addGoal(2)" class="textInteractable" style="color: blue;">+ Add Goal</button></li>
       </ul>
     </div>
   </div>
@@ -260,9 +273,5 @@ select {
 
 button {
   transition: all 0.2s ease-in-out;
-}
-
-button:hover {
-  transform: scale(1.05);
 }
 </style>
