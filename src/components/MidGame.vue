@@ -446,6 +446,7 @@ const removeFoul = (team: number, index: number) => {
                   placeholder="Custom Code"
                   class="border mr-2"
                 />
+                <!-- Start and end time inputs -->
                 <input
                   type="time"
                   v-model="foul.start"
@@ -459,6 +460,7 @@ const removeFoul = (team: number, index: number) => {
                   class="border"
                 />
               </div>
+              <!-- Display foul details -->
               <div v-else>
                 Player: {{ foul.playerId }} |
                 Time: {{ foul.time }} min |
@@ -467,6 +469,7 @@ const removeFoul = (team: number, index: number) => {
                 End: {{ foul.end }}
               </div>
             </li>
+            <!-- Button to add a new foul -->
             <li>
               <button @click="addFoul(2)" class="textInteractable" style="color: blue;">+ Add Foul</button>
             </li>
@@ -476,6 +479,7 @@ const removeFoul = (team: number, index: number) => {
     </div>
   </div>
 
+  <!-- Buttons for saving and clearing data -->
   <div class="buttons flex gap-3 mt-5">
     <button
       class="border rounded-full p-2 duration-200 border-sky-500 bg-sky-500 hover:bg-sky-600 hover:border-sky-600 dark:border-sky-700 dark:bg-sky-700 dark:text-white"
