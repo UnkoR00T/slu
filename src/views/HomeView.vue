@@ -48,33 +48,67 @@ function switchLang(lang: string) {
       <div class="navbar-start flex gap-2">
         <RouterLink class="btn btn-primary" to="/info">{{ $t('navbar.info') }}</RouterLink>
         <RouterLink class="btn btn-primary" to="/prep">{{ $t('navbar.pre') }}</RouterLink>
-        <button class="btn btn-primary" popovertarget="popover-mid" style="anchor-name:--anchor-mid">
+        <button
+          class="btn btn-primary"
+          popovertarget="popover-mid"
+          style="anchor-name: --anchor-mid"
+        >
           {{ $t('navbar.mid') }}
         </button>
-        <ul class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
-            popover id="popover-mid" style="position-anchor:--anchor-mid">
-          <li><RouterLink to="/midgame/goals">{{$t('navbar.goals')}}</RouterLink></li>
-          <li><RouterLink to="/midgame/goalkeep">{{$t('navbar.goalkeep')}}</RouterLink></li>
+        <ul
+          class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
+          popover
+          id="popover-mid"
+          style="position-anchor: --anchor-mid"
+        >
+          <li>
+            <RouterLink to="/midgame/goals">{{ $t('navbar.goals') }}</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/midgame/goalkeep">{{ $t('navbar.goalkeep') }}</RouterLink>
+          </li>
         </ul>
         <RouterLink class="btn btn-primary" to="/endgame">{{ $t('navbar.end') }}</RouterLink>
-        <button class="btn btn-primary" popovertarget="popover-1" style="anchor-name:--anchor-1">
+        <button class="btn btn-primary" popovertarget="popover-1" style="anchor-name: --anchor-1">
           {{ $t('navbar.data') }}
         </button>
-        <ul class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
-            popover id="popover-1" style="position-anchor:--anchor-1">
-          <li @click="exportData"><a>{{$t('navbar.export')}}</a></li>
-          <li @click="importData"><a>{{$t('navbar.import')}}</a></li>
+        <ul
+          class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
+          popover
+          id="popover-1"
+          style="position-anchor: --anchor-1"
+        >
+          <li @click="exportData">
+            <a>{{ $t('navbar.export') }}</a>
+          </li>
+          <li @click="importData">
+            <a>{{ $t('navbar.import') }}</a>
+          </li>
         </ul>
       </div>
       <div class="navbar-end">
-        <button class="btn btn-primary" popovertarget="popover-lang" style="anchor-name:--anchor-lang">
+        <button
+          class="btn btn-primary"
+          popovertarget="popover-lang"
+          style="anchor-name: --anchor-lang"
+        >
           {{ $t('navbar.lang') }}
         </button>
-        <ul class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
-            popover id="popover-lang" style="position-anchor:--anchor-lang">
-          <li @click="switchLang('en')"><a>{{$t('lang.en')}}</a></li>
-          <li @click="switchLang('pl')"><a>{{$t('lang.pl')}}</a></li>
-          <li @click="switchLang('cz')"><a>{{$t('lang.cz')}}</a></li>
+        <ul
+          class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
+          popover
+          id="popover-lang"
+          style="position-anchor: --anchor-lang"
+        >
+          <li @click="switchLang('en')">
+            <a>{{ $t('lang.en') }}</a>
+          </li>
+          <li @click="switchLang('pl')">
+            <a>{{ $t('lang.pl') }}</a>
+          </li>
+          <li @click="switchLang('cz')">
+            <a>{{ $t('lang.cz') }}</a>
+          </li>
         </ul>
       </div>
       <input
@@ -92,5 +126,4 @@ function switchLang(lang: string) {
     </div>
   </main>
 </template>
-<style scoped>
-</style>
+<style scoped></style>

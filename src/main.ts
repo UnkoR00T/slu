@@ -8,9 +8,9 @@ import { createI18n } from 'vue-i18n'
 
 const app = createApp(App)
 const i18n = createI18n({
-  locale: 'en',        // default language
-  fallbackLocale: 'en',// fallback language
-  messages
+  locale: 'en', // default language
+  fallbackLocale: 'en', // fallback language
+  messages,
 })
 
 app.use(createPinia())
