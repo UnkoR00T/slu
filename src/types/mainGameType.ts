@@ -3,27 +3,27 @@ import type { gameInfoType } from '@/types/gameInfoType.ts'
 
 class mainGameType {
   hostTeam: teamType = {
-    name: "",
+    name: '',
     players: [],
     trainers: [],
     goals: [],
-    fouls: []
+    fouls: [],
   }
   guestTeam: teamType = {
-    name: "",
+    name: '',
     players: [],
     trainers: [],
     goals: [],
-    fouls: []
+    fouls: [],
   }
   gameInfo: gameInfoType = {
-    organizer: "",
-    games: "",
-    place: "",
+    organizer: '',
+    games: '',
+    place: '',
     date: new Date().toDateString(),
     game_number: 0,
-    start: "16:00",
-    end: "17:00"
+    start: '16:00',
+    end: '17:00',
   }
 
   constructor() {
@@ -31,4 +31,4 @@ class mainGameType {
   }
 }
 
-export {mainGameType}
+export { mainGameType }

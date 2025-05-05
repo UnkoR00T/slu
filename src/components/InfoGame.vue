@@ -3,112 +3,66 @@ import { useMainData } from '@/stores/mainDataStore.ts'
 import { ref, type Ref } from 'vue'
 import type { gameInfoType } from '@/types/gameInfoType.ts'
 
-const mainDataStore = useMainData();
-const localGameInfo: Ref<gameInfoType> = ref(mainDataStore.tempStorage.gameInfo);
+const mainDataStore = useMainData()
+const localGameInfo: Ref<gameInfoType> = ref(mainDataStore.tempStorage.gameInfo)
 
 const save = () => {
-  mainDataStore.tempStorage.gameInfo = localGameInfo.value;
-  mainDataStore.data.save().then(() => {
-    alert("Data has been saved!")
-  }).catch(() => {
-
-  })
+  mainDataStore.tempStorage.gameInfo = localGameInfo.value
+  mainDataStore.data
+    .save()
+    .then(() => {
+      alert('Data has been saved!')
+    })
+    .catch(() => {})
 }
-const clear = () => {
-  if(confirm("Are you sure?")){
-    localStorage.removeItem("mainData");
-    window.location.reload();
-  }
-}
-
 </script>
 
 <template>
-  <h1 class="text-lg">Game Info:</h1>
-  <main>
-
-    <div class="inputBox my-2">
-      <p>Organizer</p>
-      <input
-        type="text"
-        class="border p-1 rounded"
-        name="organizer"
-        id="organizerInput"
-        v-model="localGameInfo.organizer"
-        placeholder="Organizer's name"
-      >
+  <h1 class="text-xl mb-2 font-bold">{{ $t('infotab.gameinfo') }}:</h1>
+  <main class="flex flex-col gap-2">
+    <div>
+      <p>{{ $t('infotab.org') }}</p>
+      <input type="text" class="input" name="organizer" v-model="localGameInfo.organizer" />
     </div>
-    <div class="inputBox my-2">
-      <p>Games</p>
-      <input
-        type="text"
-        class="border p-1 rounded"
-        name="games"
-        id="gamesInput"
-        v-model="localGameInfo.games"
-        placeholder="Games"
-      >
+    <div>
+      <p>{{ $t('infotab.game') }}</p>
+      <input type="text" class="input" name="games" v-model="localGameInfo.games" />
     </div>
-    <div class="inputBox my-2">
-      <p>Place</p>
-      <input
-        type="text"
-        class="border p-1 rounded"
-        name="place"
-        id="placeInput"
-        v-model="localGameInfo.place"
-        placeholder="Place"
-      >
+    <div>
+      <p>{{ $t('infotab.place') }}</p>
+      <input type="text" class="input" name="place" v-model="localGameInfo.place" />
     </div>
-    <div class="inputBox my-2">
-      <p>Date</p>
-      <input
-        type="date"
-        class="border p-1 rounded"
-        name="date"
-        id="dateInput"
-        v-model="localGameInfo.date">
+    <div>
+      <p>{{ $t('infotab.date') }}</p>
+      <input type="date" class="input" name="date" v-model="localGameInfo.date" />
     </div>
-    <div class="inputBox my-2">
-      <p>Game number</p>
+    <div>
+      <p>{{ $t('infotab.gamenumber') }}</p>
       <input
         type="number"
-        class="border p-1 rounded"
+        class="input"
         name="gameNumber"
-        id="gameNumberInput"
         v-model="localGameInfo.game_number"
-        placeholder="Game number"
-      >
+        placeholder="0-999"
+      />
     </div>
-    <div class="inputBox my-2">
-      <p>Start</p>
+    <div>
+      <p>{{ $t('infotab.started') }}</p>
       <input
         type="text"
-        class="border p-1 rounded"
+        class="input"
         name="start"
-        id="startInput"
         v-model="localGameInfo.start"
         placeholder="16:59"
-      >
+      />
     </div>
 
     <div class="buttons flex gap-3 mt-5">
-      <button
-        class="border rounded-full p-2 duration-200 border-sky-500 bg-sky-500 hover:bg-sky-600 hover:border-sky-600 dark:border-sky-700 dark:bg-sky-700 dark:text-white"
-        @click="save()">
-        <img class="h-10" src="../../public/save_icon.png">
-      </button>
-      <button
-        class="border rounded-full p-2 duration-200 border-red-500 bg-red-500 hover:bg-red-600 hover:border-red-600 dark:border-red-700 dark:bg-red-700 dark:text-white"
-        @click="clear()">
-        <img class="h-10" src="../../public/trash_icon.png">
+      <button class="btn btn-primary" @click="save()">
+        <p class="text-xl">{{ $t('global.save') }}</p>
       </button>
     </div>
   </main>
 </template>
 
-<style scoped>
-input {
-  width: 200px;
-}
-</style>
+<style scoped></style>

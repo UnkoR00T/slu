@@ -1,0 +1,74 @@
+{
+  "lang": {
+    "en": "English",
+    "pl": "Polish",
+    "cz": "Czech"
+  },
+  "global": {
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "yes": "Yes",
+    "no": "No",
+    "none": "None",
+    "actions": "Actions"
+  },
+  "codes": {
+    "powerplay": "PP - Power play",
+    "shorthanded": "SH - Shorthanded play",
+    "esh": "ESH - Both teams shorthanded",
+    "delayedPenalty": "DP - Delayed penalty",
+    "penaltyShot": "PS - Penalty shot",
+    "missedPenaltyShot": "MPS - Missed penalty shot",
+    "emptyNet": "WG - Without goalkeeper",
+    "emptyGoal": "EN - Empty net",
+    "ownGoal": "OG - Own goal",
+    "overtime": "ET - Overtime"
+  },
+  "navbar": {
+    "info": "Info",
+    "pre": "Pre Game",
+    "mid": "Mid Game",
+    "end": "End Game",
+    "data": "Data",
+    "export": "Export",
+    "import": "Import",
+    "lang": "Language",
+    "goals": "Goals",
+    "goalkeep": "Goalkeep"
+  },
+  "infotab": {
+    "gameinfo": "Game informations",
+    "org": "Organizer",
+    "game": "Game",
+    "place": "Place",
+    "date": "Date",
+    "gamenumber": "Game number",
+    "started": "Start time"
+  },
+  "pretab": {
+    "host": "Host",
+    "guest": "Guest",
+    "playernumber": "Player number",
+    "playername": "Player name",
+    "capitan": "Capitan",
+    "goalkeeper": "Goalkeeper",
+    "playerlicense": "License",
+    "addplayer": "Add Player",
+    "addtrainer": "Add Trainer",
+    "trainer": "Trainer name",
+    "players": "Players",
+    "trainers": "Trainers"
+  },
+  "midtab": {
+    "hostgoals": "Host's goals",
+    "guestgoals": "Guest's goals",
+    "midgame": "Mid Game Info",
+    "goal": "Goal",
+    "time": "Time",
+    "player": "Player",
+    "assist": "Assist",
+    "code": "Code",
+    "addgoal": "Add goal"
+  }
+}

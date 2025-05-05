@@ -1,0 +1,74 @@
+{
+  "lang": {
+    "en": "Angielski",
+    "pl": "Polski",
+    "cz": "Czeski"
+  },
+  "global": {
+    "save": "Zapisz",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "yes": "Tak",
+    "no": "Nie",
+    "none": "Brak",
+    "actions": "Akcje"
+  },
+  "codes": {
+    "powerplay": "PP - Gra w przewadze",
+    "shorthanded": "SH - Gra w osłabieniu",
+    "esh": "ESH - Obie drużyny w osłabieniu",
+    "delayedPenalty": "DP - Opóźniona kara",
+    "penaltyShot": "PS - Rzut karny",
+    "missedPenaltyShot": "MPS - Nietrafiony rzut karny",
+    "emptyNet": "WG - Bez bramkarza",
+    "emptyGoal": "EN - Pusta bramka",
+    "ownGoal": "OG - Gol samobójczy",
+    "overtime": "ET - Dogrywka"
+  },
+  "navbar": {
+    "info": "Informacje",
+    "pre": "Przed meczem",
+    "mid": "W trakcie meczu",
+    "end": "Po meczu",
+    "data": "Dane",
+    "export": "Eksportuj",
+    "import": "Importuj",
+    "lang": "Język",
+    "goals": "Gole",
+    "goalkeep": "Bramkarz"
+  },
+  "infotab": {
+    "gameinfo": "Informacje o meczu",
+    "org": "Organizator",
+    "game": "Rozgrywki",
+    "place": "Miejsce",
+    "date": "Data",
+    "gamenumber": "Numer meczu",
+    "started": "Godzina rozpoczęcia"
+  },
+  "pretab": {
+    "host": "Gospodarz",
+    "guest": "Gość",
+    "playernumber": "Numer zawodnika",
+    "playername": "Imię i nazwisko zawodnika",
+    "capitan": "Kapitan",
+    "goalkeeper": "Bramkarz",
+    "playerlicense": "Licencja",
+    "addplayer": "Dodaj zawodnika",
+    "addtrainer": "Dodaj trenera",
+    "trainer": "Imię i nazwisko trenera",
+    "players": "Zawodnicy",
+    "trainers": "Trenerzy"
+  },
+  "midtab": {
+    "hostgoals": "Gole gospodarza",
+    "guestgoals": "Gole gościa",
+    "midgame": "Informacje w trakcie meczu",
+    "goal": "Gol",
+    "time": "Czas",
+    "player": "Zawodnik",
+    "assist": "Asysta",
+    "code": "Kod",
+    "addgoal": "Dodaj gola"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "lang": {
+    "en": "Angličtina",
+    "pl": "Polština",
+    "cz": "Čeština"
+  },
+  "global": {
+    "save": "Uložit",
+    "edit": "Upravit",
+    "delete": "Smazat",
+    "yes": "Ano",
+    "no": "Ne",
+    "none": "Žádný",
+    "actions": "Akce"
+  },
+  "codes": {
+    "powerplay": "PP - Hra v přesilovce",
+    "shorthanded": "SH - Hra v oslabení",
+    "esh": "ESH - Obě týmy v oslabení",
+    "delayedPenalty": "DP - Zpožděná trestná",
+    "penaltyShot": "PS - Trestný střel",
+    "missedPenaltyShot": "MPS - Nepovedený trestný střel",
+    "emptyNet": "WG - Bez brankáře",
+    "emptyGoal": "EN - Prázdná branka",
+    "ownGoal": "OG - Vlastní gól",
+    "overtime": "ET - Prodloužení"
+  },
+  "navbar": {
+    "info": "Informace",
+    "pre": "Před zápasem",
+    "mid": "V průběhu zápasu",
+    "end": "Po zápase",
+    "data": "Data",
+    "export": "Exportovat",
+    "import": "Importovat",
+    "lang": "Jazyk",
+    "goals": "Góly",
+    "goalkeep": "Brankář"
+  },
+  "infotab": {
+    "gameinfo": "Informace o zápasu",
+    "org": "Organizátor",
+    "game": "Zápas",
+    "place": "Místo",
+    "date": "Datum",
+    "gamenumber": "Číslo zápasu",
+    "started": "Čas začátku"
+  },
+  "pretab": {
+    "host": "Domácí",
+    "guest": "Hosté",
+    "playernumber": "Číslo hráče",
+    "playername": "Jméno hráče",
+    "capitan": "Kapitán",
+    "goalkeeper": "Brankář",
+    "playerlicense": "Licence",
+    "addplayer": "Přidat hráče",
+    "addtrainer": "Přidat trenéra",
+    "trainer": "Jméno trenéra",
+    "players": "Hráči",
+    "trainers": "Trenéři"
+  },
+  "midtab": {
+    "hostgoals": "Góly domácího",
+    "guestgoals": "Góly hostů",
+    "midgame": "Informace v průběhu zápasu",
+    "goal": "Gól",
+    "time": "Čas",
+    "player": "Hráč",
+    "assist": "Asistence",
+    "code": "Kód",
+    "addgoal": "Přidat gól"
+  }
+}
