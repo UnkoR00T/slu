@@ -35,7 +35,8 @@
     "import": "Import",
     "lang": "Language",
     "goals": "Goals",
-    "goalkeep": "Goalkeep"
+    "goalkeep": "Goalkeep",
+    "pdf": "PDF"
   },
   "infotab": {
     "gameinfo": "Game informations",

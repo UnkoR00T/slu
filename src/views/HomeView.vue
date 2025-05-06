@@ -84,6 +84,9 @@ function switchLang(lang: string) {
           <li @click="importData">
             <a>{{ $t('navbar.import') }}</a>
           </li>
+          <li>
+            <RouterLink to="/generated">{{ $t('navbar.pdf') }}</RouterLink>
+          </li>
         </ul>
       </div>
       <div class="navbar-end">
