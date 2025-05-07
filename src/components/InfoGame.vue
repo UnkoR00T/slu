@@ -2,16 +2,21 @@
 import { useMainData } from '@/stores/mainDataStore.ts'
 import { ref, type Ref } from 'vue'
 import type { gameInfoType } from '@/types/gameInfoType.ts'
+import { useI18n } from 'vue-i18n'
+import { useToast } from '@/stores/toastController.ts'
 
 const mainDataStore = useMainData()
 const localGameInfo: Ref<gameInfoType> = ref(mainDataStore.tempStorage.gameInfo)
+
+const { t } = useI18n()
+const toastController = useToast();
 
 const save = () => {
   mainDataStore.tempStorage.gameInfo = localGameInfo.value
   mainDataStore.data
     .save()
     .then(() => {
-      alert('Data has been saved!')
+      toastController.addToast(t('global.saved'));
     })
     .catch(() => {})
 }

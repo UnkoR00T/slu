@@ -6,6 +6,7 @@ import MidGameGoals from '@/components/MidGameGoals.vue'
 import EndGame from '@/components/EndGame.vue'
 import MidGameGoalkeep from '@/components/MidGameGoalkeep.vue'
 import Generated from '@/components/Generated.vue'
+import MidGameFouls from '@/components/MidGameFouls.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,10 @@ const router = createRouter({
         {
           path: '/midgame/goalkeep',
           component: MidGameGoalkeep,
+        },
+        {
+          path: '/midgame/fouls',
+          component: MidGameFouls,
         },
         {
           path: '/endgame',

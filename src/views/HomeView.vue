@@ -67,6 +67,9 @@ function switchLang(lang: string) {
           <li>
             <RouterLink to="/midgame/goalkeep">{{ $t('navbar.goalkeep') }}</RouterLink>
           </li>
+          <li>
+            <RouterLink to="/midgame/fouls">{{ $t('navbar.fouls') }}</RouterLink>
+          </li>
         </ul>
         <RouterLink class="btn btn-primary" to="/endgame">{{ $t('navbar.end') }}</RouterLink>
         <button class="btn btn-primary" popovertarget="popover-1" style="anchor-name: --anchor-1">

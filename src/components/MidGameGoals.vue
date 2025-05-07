@@ -3,6 +3,8 @@ import { useMainData } from '@/stores/mainDataStore.ts'
 import { mainGameType } from '@/types/mainGameType.ts'
 import { ref, type Ref } from 'vue'
 import type { goalType } from '@/types/goalType.ts'
+import { useI18n } from 'vue-i18n'
+import { useToast } from '@/stores/toastController.ts'
 
 const mainDataStore = useMainData()
 
@@ -14,6 +16,9 @@ const guestTeamGoals = ref<goalType[]>([])
 
 const hostPlayers = ref(mainDataStore.tempStorage.hostTeam.players)
 const guestPlayers = ref(mainDataStore.tempStorage.guestTeam.players)
+
+const { t } = useI18n()
+const toastController = useToast();
 
 mainDataStore.data.load().then((res: mainGameType) => {
   hostTeamGoals.value = res.hostTeam.goals
@@ -71,7 +76,7 @@ const saveGoals = async () => {
   mainDataStore.data
     .save()
     .then(() => {
-      alert('Saved!')
+      toastController.addToast(t('global.saved'));
     })
     .catch(() => {
       alert('Something went wrong!')

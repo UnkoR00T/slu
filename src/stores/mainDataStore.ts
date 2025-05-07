@@ -4,8 +4,13 @@ import { ref, type Ref } from 'vue'
 import type { teamType } from '@/types/teamType.ts'
 import type { goalType } from '@/types/goalType.ts'
 import type { foulType } from '@/types/foulType.ts'
+import { useToast } from '@/stores/toastController.ts'
+import { useI18n } from 'vue-i18n'
 
 export const useMainData = defineStore('main', () => {
+  const { t } = useI18n()
+  const toastController = useToast();
+
   const tempStorage: Ref<mainGameType> = ref({
     guestTeam: {
       name: '',
@@ -30,7 +35,14 @@ export const useMainData = defineStore('main', () => {
       start: '',
       end: '',
     },
-  })
+  });
+
+  setInterval(async () => {
+    await data.save().then(() => {}).catch(() => {
+      alert("Something went wrong!");
+    });
+    toastController.addToast(t('global.autosaved'));
+  }, 2000 * 60);
 
   const fouls = {
     add: (
@@ -86,7 +98,7 @@ export const useMainData = defineStore('main', () => {
     add: (
       team: number,
       playerId: number,
-      assistId: number | 'none',
+      assistId: number | null,
       time: string,
       code: string,
     ): Promise<number> => {
@@ -117,12 +129,11 @@ export const useMainData = defineStore('main', () => {
     },
   }
   const data = {
-    save: (): Promise<boolean> => {
+    save: (): Promise<void> => {
       return new Promise((resolve, reject) => {
         const json = JSON.stringify(tempStorage.value)
-        console.log(json)
         localStorage.setItem('mainData', json)
-        resolve(true)
+        resolve()
       })
     },
 

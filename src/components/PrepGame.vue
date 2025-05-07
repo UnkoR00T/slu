@@ -3,12 +3,15 @@ import { useMainData } from '@/stores/mainDataStore.ts'
 import type { playerType } from '@/types/playerType.ts'
 import { ref, type Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useToast } from '@/stores/toastController.ts'
 
-const { t } = useI18n()
 const mainDataStore = useMainData()
 
 const editTeam: Ref<number> = ref(0)
 const editIndex: Ref<number> = ref(-1)
+
+const { t } = useI18n()
+const toastController = useToast();
 
 const hostTeamName: Ref<string> = ref('')
 const guestTeamName: Ref<string> = ref('')
@@ -39,7 +42,7 @@ const save = async () => {
     mainDataStore.tempStorage.guestTeam.trainers = guestTeamTrainers.value
 
     await mainDataStore.data.save()
-    alert('Saved')
+    toastController.addToast(t('global.saved'));
   } catch (e) {
     alert('Error: ' + e)
   }
