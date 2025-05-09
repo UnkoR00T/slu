@@ -132,4 +132,6 @@ function switchLang(lang: string) {
     </div>
   </main>
 </template>
-<style scoped></style>
+<style scoped>
+
+</style>

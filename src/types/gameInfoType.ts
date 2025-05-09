@@ -6,6 +6,8 @@ type gameInfoType = {
   game_number: number
   start: string
   end: string
+  halfTime: number
+  halfCount: number
 }
 
 export type { gameInfoType }

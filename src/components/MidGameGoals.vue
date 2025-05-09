@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMainData } from '@/stores/mainDataStore.ts'
 import { mainGameType } from '@/types/mainGameType.ts'
-import { ref, type Ref } from 'vue'
+import { onBeforeMount, ref, type Ref } from 'vue'
 import type { goalType } from '@/types/goalType.ts'
 import { useI18n } from 'vue-i18n'
 import { useToast } from '@/stores/toastController.ts'
@@ -20,32 +20,22 @@ const guestPlayers = ref(mainDataStore.tempStorage.guestTeam.players)
 const { t } = useI18n()
 const toastController = useToast();
 
-mainDataStore.data.load().then((res: mainGameType) => {
-  hostTeamGoals.value = res.hostTeam.goals
-  guestTeamGoals.value = res.guestTeam.goals
+const load = () => {
+  hostTeamGoals.value = mainDataStore.tempStorage.hostTeam.goals
+  guestTeamGoals.value = mainDataStore.tempStorage.guestTeam.goals
 
-  hostPlayers.value = res.hostTeam.players
-  guestPlayers.value = res.guestTeam.players
-})
+  hostPlayers.value = mainDataStore.tempStorage.hostTeam.players
+  guestPlayers.value = mainDataStore.tempStorage.guestTeam.players
+};
 
-const addGoal = (team: number) => {
-  const newGoal: goalType = {
-    goalNumber: team === 1 ? hostTeamGoals.value.length + 1 : guestTeamGoals.value.length + 1,
-    playerId: null,
-    assistId: null,
-    time: '',
-    code: '',
-  }
-
-  if (team === 1) {
-    hostTeamGoals.value.push(newGoal)
-    editGoalTeam.value = team
-    editGoalIndex.value = hostTeamGoals.value.length - 1
-  } else {
-    guestTeamGoals.value.push(newGoal)
-    editGoalTeam.value = team
-    editGoalIndex.value = guestTeamGoals.value.length - 1
-  }
+const addGoal = async (team: number) => {
+  let index = -1;
+  await mainDataStore.goals.add(team, null, null, '', '').then((res) => {
+    saveGoals();
+    index = res;
+  }).catch(() => {});
+  editGoalTeam.value = team
+  editGoalIndex.value = index
 }
 const edit = (team: number, index: number) => {
   if (editGoalTeam.value == team && editGoalIndex.value == index) {
@@ -58,30 +48,22 @@ const edit = (team: number, index: number) => {
 }
 const removeGoal = (team: number, index: number) => {
   if (confirm('Are you sure?')) {
-    if (team === 1) {
-      hostTeamGoals.value.splice(index, 1)
-      hostTeamGoals.value.forEach((goal, i) => {
-        goal.goalNumber = i + 1
-      })
-    } else {
-      guestTeamGoals.value.splice(index, 1)
-      guestTeamGoals.value.forEach((goal, i) => {
-        goal.goalNumber = i + 1
-      })
-    }
+    mainDataStore.goals.remove(team, index).then(() => saveGoals()).catch(()=>{});
   }
 }
 
-const saveGoals = async () => {
+const saveGoals = async (sendToast: boolean = true) => {
   mainDataStore.data
     .save()
     .then(() => {
-      toastController.addToast(t('global.saved'));
+      if (sendToast) toastController.addToast(t('global.saved'));
     })
     .catch(() => {
       alert('Something went wrong!')
     })
 }
+
+onBeforeMount(() => load());
 </script>
 
 <template>

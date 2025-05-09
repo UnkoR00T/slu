@@ -78,7 +78,9 @@
     "place": "Place",
     "date": "Date",
     "gamenumber": "Game number",
-    "started": "Start time"
+    "started": "Start time",
+    "halflength": "Duration of the third",
+    "halfcount": "Number of thirds"
   },
   "pretab": {
     "host": "Host",

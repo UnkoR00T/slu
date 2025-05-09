@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useMainData } from '@/stores/mainDataStore.ts'
-import { mainGameType } from '@/types/mainGameType.ts'
-import { ref, type Ref } from 'vue'
+import { onBeforeMount, ref, type Ref } from 'vue'
 import type { foulType } from '@/types/foulType.ts'
 import { useI18n } from 'vue-i18n'
 import { useToast } from '@/stores/toastController.ts'
@@ -20,32 +19,21 @@ const guestPlayers = ref(mainDataStore.tempStorage.guestTeam.players)
 const { t } = useI18n()
 const toastController = useToast();
 
-mainDataStore.data.load().then((res: mainGameType) => {
-  hostTeamFouls.value = res.hostTeam.fouls
-  guestTeamFouls.value = res.guestTeam.fouls
+const load = () => {
+  hostTeamFouls.value = mainDataStore.tempStorage.hostTeam.fouls
+  guestTeamFouls.value = mainDataStore.tempStorage.guestTeam.fouls
+  hostPlayers.value = mainDataStore.tempStorage.hostTeam.players
+  guestPlayers.value = mainDataStore.tempStorage.guestTeam.players
+}
 
-  hostPlayers.value = res.hostTeam.players
-  guestPlayers.value = res.guestTeam.players
-})
-
-const addFoul = (team: number) => {
-  const newFoul: foulType = {
-    code: '',
-    end: '',
-    playerId: null,
-    start: '',
-    time: 2
-  }
-
-  if (team === 1) {
-    hostTeamFouls.value.push(newFoul)
-    editGoalTeam.value = team
-    editGoalIndex.value = hostTeamFouls.value.length - 1
-  } else {
-    guestTeamFouls.value.push(newFoul)
-    editGoalTeam.value = team
-    editGoalIndex.value = guestTeamFouls.value.length - 1
-  }
+const addFoul = async (team: number) => {
+  let index = -1;
+  await mainDataStore.fouls.add(team, null, 2, '', '').then((res)=>{
+    saveGoals();
+    index = res;
+  }).catch(() => {});
+  editGoalTeam.value = team
+  editGoalIndex.value = index
 }
 const edit = (team: number, index: number) => {
   if (editGoalTeam.value == team && editGoalIndex.value == index) {
@@ -58,24 +46,21 @@ const edit = (team: number, index: number) => {
 }
 const removeGoal = (team: number, index: number) => {
   if (confirm('Are you sure?')) {
-    if (team === 1) {
-      hostTeamFouls.value.splice(index, 1)
-    } else {
-      guestTeamFouls.value.splice(index, 1)
-    }
+    mainDataStore.fouls.remove(team, index).then(() => saveGoals()).catch(()=>{});
   }
 }
 
-const saveGoals = async () => {
+const saveGoals = async (sendToast: boolean = true) => {
   mainDataStore.data
     .save()
     .then(() => {
-      toastController.addToast(t('global.saved'));
+      if (sendToast) toastController.addToast(t('global.saved'));
     })
     .catch(() => {
       alert('Something went wrong!')
     })
 }
+onBeforeMount(() => load())
 </script>
 
 <template>

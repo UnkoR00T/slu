@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMainData } from '@/stores/mainDataStore.ts'
 import type { playerType } from '@/types/playerType.ts'
-import { ref, type Ref } from 'vue'
+import { onBeforeMount, ref, type Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useToast } from '@/stores/toastController.ts'
 
@@ -19,16 +19,16 @@ const hostTeamPlayers: Ref<playerType[]> = ref([])
 const guestTeamPlayers: Ref<playerType[]> = ref([])
 const hostTeamTrainers: Ref<string[]> = ref([])
 const guestTeamTrainers: Ref<string[]> = ref([])
-mainDataStore.data.load().then((res) => {
-  hostTeamName.value = res.hostTeam.name
-  guestTeamName.value = res.guestTeam.name
+const load = () => {
+  hostTeamName.value = mainDataStore.tempStorage.hostTeam.name
+  guestTeamName.value = mainDataStore.tempStorage.guestTeam.name
 
-  hostTeamPlayers.value = res.hostTeam.players
-  guestTeamPlayers.value = res.guestTeam.players
+  hostTeamPlayers.value = mainDataStore.tempStorage.hostTeam.players
+  guestTeamPlayers.value = mainDataStore.tempStorage.guestTeam.players
 
-  hostTeamTrainers.value = res.hostTeam.trainers
-  guestTeamTrainers.value = res.guestTeam.trainers
-})
+  hostTeamTrainers.value = mainDataStore.tempStorage.hostTeam.trainers
+  guestTeamTrainers.value = mainDataStore.tempStorage.guestTeam.trainers
+};
 
 const save = async () => {
   try {
@@ -103,6 +103,7 @@ const addTrainer = (team: number) => {
     edit(4, guestTeamTrainers.value.length - 1)
   }
 }
+onBeforeMount(()=>load());
 </script>
 
 <template>

@@ -8,6 +8,7 @@ class mainGameType {
     trainers: [],
     goals: [],
     fouls: [],
+    goalkeeps: [],
   }
   guestTeam: teamType = {
     name: '',
@@ -15,6 +16,7 @@ class mainGameType {
     trainers: [],
     goals: [],
     fouls: [],
+    goalkeeps: [],
   }
   gameInfo: gameInfoType = {
     organizer: '',
@@ -24,6 +26,8 @@ class mainGameType {
     game_number: 0,
     start: '16:00',
     end: '17:00',
+    halfTime: 15,
+    halfCount: 3
   }
 
   constructor() {
