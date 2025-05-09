@@ -18,9 +18,9 @@ const inputFile = (event: InputEvent) => {
     try {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
-      mainDataStore.tempStorage = JSON.parse(e.target.result) as mainGameType;
+      mainDataStore.tempStorage = JSON.parse(e.target.result) as mainGameType
       mainDataStore.data.save().then(() => {
-        window.location.reload();
+        window.location.reload()
       })
     } catch {
       alert('Invalid JSON file.')
@@ -28,49 +28,104 @@ const inputFile = (event: InputEvent) => {
   }
   reader.readAsText(file)
 }
-const fileInput = ref();
+const fileInput = ref()
 const importData = () => {
-  fileInput.value.click();
+  fileInput.value.click()
+}
+import { useI18n } from 'vue-i18n'
+
+const { locale } = useI18n()
+
+function switchLang(lang: string) {
+  locale.value = lang
+  localStorage.setItem('lang', lang)
 }
 </script>
 
 <template>
   <main>
-    <nav class="bg-white dark:bg-sky-700 p-2 pl-[25px] flex sticky top-0">
-      <RouterLink
-        class="p-2 px-5 text-md m-2 bg-sky-600 rounded-[7px] hover:bg-sky-700 duration-200"
-        to="/info"
-        >Info</RouterLink
-      >
-      <RouterLink
-        class="p-2 px-5 text-md m-2 bg-sky-600 rounded-[7px] hover:bg-sky-700 duration-200"
-        to="/prep"
-        >Pre game</RouterLink
-      >
-      <RouterLink
-        class="p-2 px-5 text-md m-2 bg-sky-600 rounded-[7px] hover:bg-sky-700 duration-200"
-        to="/midgame"
-        >Mid game</RouterLink
-      >
-      <RouterLink
-        class="p-2 px-5 text-md m-2 bg-sky-600 rounded-[7px] hover:bg-sky-700 duration-200"
-        to="/endgame"
-        >End game</RouterLink
-      >
-      <div class="dataActions p-2 px-5 text-md m-2 bg-sky-600 rounded-[7px] duration-200">
-        Data >
-        <div class="options bg-sky-600 rounded">
-          <div @click="exportData"
-               class="py-1 text-md bg-sky-600 rounded-[7px] hover:bg-sky-700 duration-200"
-          >Export</div>
-          <div @click="importData"
-               class="py-1 text-md bg-sky-600 rounded-[7px] hover:bg-sky-700 duration-200"
-          >
-            Import
-            <input style="display: none" ref="fileInput" type="file" name="file" id="file" @change="inputFile" accept=".json" />
-          </div>
-        </div>
+    <nav class="navbar">
+      <div class="navbar-start flex gap-2">
+        <RouterLink class="btn btn-primary" to="/info">{{ $t('navbar.info') }}</RouterLink>
+        <RouterLink class="btn btn-primary" to="/prep">{{ $t('navbar.pre') }}</RouterLink>
+        <button
+          class="btn btn-primary"
+          popovertarget="popover-mid"
+          style="anchor-name: --anchor-mid"
+        >
+          {{ $t('navbar.mid') }}
+        </button>
+        <ul
+          class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
+          popover
+          id="popover-mid"
+          style="position-anchor: --anchor-mid"
+        >
+          <li>
+            <RouterLink to="/midgame/goals">{{ $t('navbar.goals') }}</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/midgame/goalkeep">{{ $t('navbar.goalkeep') }}</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/midgame/fouls">{{ $t('navbar.fouls') }}</RouterLink>
+          </li>
+        </ul>
+        <RouterLink class="btn btn-primary" to="/endgame">{{ $t('navbar.end') }}</RouterLink>
+        <button class="btn btn-primary" popovertarget="popover-1" style="anchor-name: --anchor-1">
+          {{ $t('navbar.data') }}
+        </button>
+        <ul
+          class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
+          popover
+          id="popover-1"
+          style="position-anchor: --anchor-1"
+        >
+          <li @click="exportData">
+            <a>{{ $t('navbar.export') }}</a>
+          </li>
+          <li @click="importData">
+            <a>{{ $t('navbar.import') }}</a>
+          </li>
+          <li>
+            <RouterLink to="/generated">{{ $t('navbar.pdf') }}</RouterLink>
+          </li>
+        </ul>
       </div>
+      <div class="navbar-end">
+        <button
+          class="btn btn-primary"
+          popovertarget="popover-lang"
+          style="anchor-name: --anchor-lang"
+        >
+          {{ $t('navbar.lang') }}
+        </button>
+        <ul
+          class="dropdown menu w-52 rounded-box bg-base-200 shadow-sm"
+          popover
+          id="popover-lang"
+          style="position-anchor: --anchor-lang"
+        >
+          <li @click="switchLang('en')">
+            <a>{{ $t('lang.en') }}</a>
+          </li>
+          <li @click="switchLang('pl')">
+            <a>{{ $t('lang.pl') }}</a>
+          </li>
+          <li @click="switchLang('cz')">
+            <a>{{ $t('lang.cz') }}</a>
+          </li>
+        </ul>
+      </div>
+      <input
+        style="display: none"
+        ref="fileInput"
+        type="file"
+        name="file"
+        id="file"
+        @change="inputFile"
+        accept=".json"
+      />
     </nav>
     <div class="p-3">
       <RouterView />
@@ -78,21 +133,5 @@ const importData = () => {
   </main>
 </template>
 <style scoped>
-.dataActions{
-  width: 100px;
-  text-align: center;
-  position: relative;
-}
-.dataActions > div{
-  display: none;
-  position: absolute;
-  width: 100px;
-  overflow: hidden;
-  top: 40px;
-  left: 0;
-  box-shadow: 0 0 5px black;
-}
-.dataActions:hover > div{
-  display: block;
-}
+
 </style>

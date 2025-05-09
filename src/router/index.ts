@@ -2,8 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PrepGame from '@/components/PrepGame.vue'
 import InfoGame from '@/components/InfoGame.vue'
-import MidGame from '@/components/MidGame.vue'
+import MidGameGoals from '@/components/MidGameGoals.vue'
 import EndGame from '@/components/EndGame.vue'
+import MidGameGoalkeep from '@/components/MidGameGoalkeep.vue'
+import Generated from '@/components/Generated.vue'
+import MidGameFouls from '@/components/MidGameFouls.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,22 +17,34 @@ const router = createRouter({
       component: HomeView,
       children: [
         {
-          path: "/prep",
-          component: PrepGame
+          path: '/prep',
+          component: PrepGame,
         },
         {
-          path: "/info",
-          component: InfoGame
+          path: '/info',
+          component: InfoGame,
         },
         {
-          path: "/midgame",
-          component: MidGame
+          path: '/midgame/goals',
+          component: MidGameGoals,
         },
         {
-          path: "/endgame",
-          component: EndGame
+          path: '/midgame/goalkeep',
+          component: MidGameGoalkeep,
+        },
+        {
+          path: '/midgame/fouls',
+          component: MidGameFouls,
+        },
+        {
+          path: '/endgame',
+          component: EndGame,
+        },
+        {
+          path: '/generated',
+          component: Generated
         }
-      ]
+      ],
     }
   ],
 })
