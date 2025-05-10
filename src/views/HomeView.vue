@@ -4,11 +4,12 @@ import type { mainGameType } from '@/types/mainGameType.ts'
 import { ref } from 'vue'
 
 const mainDataStore = useMainData()
+const router = useRouter();
 
 const exportData = () => {
   mainDataStore.data.download().then(() => {})
 }
-const inputFile = (event: InputEvent) => {
+const inputFile = (event: Event) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   const file = event.target.files[0]
@@ -33,6 +34,8 @@ const importData = () => {
   fileInput.value.click()
 }
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import authService from '@/functions/api/auth.service.ts'
 
 const { locale } = useI18n()
 
@@ -40,6 +43,13 @@ function switchLang(lang: string) {
   locale.value = lang
   localStorage.setItem('lang', lang)
 }
+router.beforeEach((to, from, next) => {
+  authService.verify().then(() => {
+    next();
+  }).catch(() => {
+  })
+})
+authService.verify().then(() => {})
 </script>
 
 <template>

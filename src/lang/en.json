@@ -111,5 +111,9 @@
     "end": "End",
     "hostfoul": "Host's fouls",
     "guestfoul": "Guest's fouls"
+  },
+  "endtab": {
+    "endinfo": "End game info",
+    "ended": "Game ended at:"
   }
 }

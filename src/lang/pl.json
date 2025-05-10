@@ -12,7 +12,7 @@
     "no": "Nie",
     "none": "Brak",
     "actions": "Akcje",
-    "autosaved": "Dane zostały automatycznie zapisane w pamięci przeglądarki. Następne zapisanie nastąpi za 2 minuty.",
+    "autosaved": "Dane zostały automatycznie zapisane w pamięci przeglądarki. Kolejny zapis nastąpi za 2 minuty.",
     "saved": "Dane zostały zapisane w pamięci przeglądarki."
   },
   "codes": {
@@ -28,32 +28,32 @@
     "overtime": "ET - Dogrywka"
   },
   "fouls": {
-    "201": "Uderzanie",
-    "202": "Blokowanie kija",
-    "203": "Podbijanie kija",
-    "205": "Wysokie kopnięcie",
+    "201": "Uderzenie",
+    "202": "Blokowanie kijem",
+    "203": "Podnoszenie kija",
+    "205": "Kopnięcie",
     "206": "Ostra gra",
     "209": "Trzymanie",
     "210": "Przeszkadzanie",
-    "211": "Nieprawidłowa odległość",
+    "211": "Nieprawidłowy dystans",
     "212": "Gra w pozycji leżącej",
-    "213": "Gra ręką",
+    "213": "Podanie ręką",
     "215": "Nieprawidłowa zmiana",
-    "216": "Zbyt wielu zawodników na boisku",
-    "217": "Powtarzające się przewinienie",
+    "216": "Zbyt wielu graczy na boisku",
+    "217": "Powtórne przewinienie",
     "218": "Opóźnianie gry",
-    "219": "Protest przeciwko decyzji sędziego",
-    "220": "Nieprawidłowe wejście na boisko",
-    "221": "Nieprawidłowe wyposażenie",
-    "222": "Mierzenie kija",
+    "219": "Protestowanie decyzji sędziego",
+    "220": "Nielegalne wejście na boisko",
+    "221": "Nieprawidłowy sprzęt",
+    "222": "Pomiar kija",
     "224": "Gra bez kija",
-    "225": "Niepozbieranie złamanego kija",
-    "501": "Niebezpieczna gra kijem",
+    "225": "Brak usunięcia złamanego kija",
+    "501": "Niebezpieczne użycie kija",
     "502": "Rzucanie kijem/sprzętem",
-    "503": "Hakowanie",
-    "504": "Brutalna gra ciałem (2+10 MIN)",
+    "503": "Cięcie",
+    "504": "Brutalne uderzenie ciałem (2+10 MIN)",
     "101": "Niesportowe zachowanie",
-    "102": "Symulacja: KARA MECZOWA (2+2+20 MIN)",
+    "102": "Symulowanie: KARA MECZOWA (2+2+20 MIN)",
     "301": "Techniczna kara meczowa",
     "302": "Kara meczowa"
   },
@@ -67,7 +67,7 @@
     "import": "Import",
     "lang": "Język",
     "goals": "Bramki",
-    "goalkeep": "Obrony",
+    "goalkeep": "Bramkarze",
     "pdf": "PDF",
     "fouls": "Kary"
   },
@@ -78,11 +78,13 @@
     "place": "Miejsce",
     "date": "Data",
     "gamenumber": "Numer meczu",
-    "started": "Godzina rozpoczęcia"
+    "started": "Godzina rozpoczęcia",
+    "halflength": "Czas trwania tercji",
+    "halfcount": "Liczba tercji"
   },
   "pretab": {
     "host": "Gospodarz",
-    "guest": "Goście",
+    "guest": "Gość",
     "playernumber": "Numer zawodnika",
     "playername": "Imię i nazwisko zawodnika",
     "capitan": "Kapitan",
@@ -109,5 +111,9 @@
     "end": "Koniec",
     "hostfoul": "Kary gospodarzy",
     "guestfoul": "Kary gości"
+  },
+  "endtab": {
+    "endinfo": "Informacje po meczu",
+    "ended": "Mecz zakończył się o:"
   }
 }

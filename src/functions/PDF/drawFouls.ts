@@ -7,18 +7,22 @@ const drawFouls = (page: PDFPage, data: mainGameType, font: PDFFont) => {
     if (index >= 13) {
       return
     }
-    page.drawText(goal.playerId?.toString(), {
-      ...getCords(242.5, 54.5 + (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
-      size: 7,
-      font,
-      color: rgb(0, 0, 0),
-    })
-    page.drawText(goal.time.toString(), {
-      ...getCords(252.5, 54.5 + (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
-      size: 7,
-      font,
-      color: rgb(0, 0, 0),
-    })
+    if(goal.playerId){
+      page.drawText(goal.playerId?.toString(), {
+        ...getCords(242.5, 54.5 + (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
+        size: 7,
+        font,
+        color: rgb(0, 0, 0),
+      })
+    }
+    if(goal.time){
+      page.drawText(goal.time.toString(), {
+        ...getCords(252.5, 54.5 + (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
+        size: 7,
+        font,
+        color: rgb(0, 0, 0),
+      })
+    }
     page.drawText(goal.start, {
       ...getCords(269, 54.5 + (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
       size: 7,
@@ -44,18 +48,22 @@ const drawFouls = (page: PDFPage, data: mainGameType, font: PDFFont) => {
     if (index >= 13) {
       return
     }
-    page.drawText(goal.playerId?.toString(), {
-      ...getCords(242.5, 147 + offset),
-      size: 7,
-      font,
-      color: rgb(0, 0, 0),
-    })
-    page.drawText(goal.time.toString(), {
-      ...getCords(252.5, 147+ offset),
-      size: 7,
-      font,
-      color: rgb(0, 0, 0),
-    })
+    if(goal.playerId) {
+      page.drawText(goal.playerId?.toString(), {
+        ...getCords(242.5, 147 + offset),
+        size: 7,
+        font,
+        color: rgb(0, 0, 0),
+      })
+    }
+    if(goal.time){
+      page.drawText(goal.time.toString(), {
+        ...getCords(252.5, 147+ offset),
+        size: 7,
+        font,
+        color: rgb(0, 0, 0),
+      })
+    }
     page.drawText(goal.start, {
       ...getCords(269, 147 + offset),
       size: 7,
