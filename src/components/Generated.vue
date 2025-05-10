@@ -8,8 +8,10 @@ import { drawGoals } from '@/functions/PDF/drawGoals.ts'
 import { drawTeams } from '@/functions/PDF/drawTeams.ts'
 import { drawInfo } from '@/functions/PDF/drawInfo.ts'
 import { drawFouls } from '@/functions/PDF/drawFouls.ts'
+import { drawGoalKeeps } from '@/functions/PDF/drawGoalKeeps.ts'
+import { drawTrainers } from '@/functions/PDF/drawTrainers.ts'
 
-const pdfUrl = '/pdf.pdf';
+const pdfUrl = '/site/pdf.pdf';
 const editedPdfUrl = ref('');
 
 const mainDataStore = useMainData();
@@ -39,6 +41,12 @@ const loadAndEditPDF = async () => {
 
   // Fouls
   drawFouls(page, mainDataStore.tempStorage, font);
+
+  // Goalkeeps
+  drawGoalKeeps(page, mainDataStore.tempStorage, font);
+
+  // Trainers
+  drawTrainers(page, mainDataStore.tempStorage, font);
 
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: 'application/pdf' });
