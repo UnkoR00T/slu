@@ -1,0 +1,15 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "backend"
+path = "src/main.rs"
+
+[dependencies]
+rocket = { version = "0.5.1", features = ["json"] }
+serde = { version = "1.0.219", features = ["derive"] }
+jsonwebtoken = "9"
+chrono = { version = "0.4.41", features = ["serde"] }
+dotenvy = "0.15"

@@ -1,0 +1,5 @@
+/target
+/slu/*
+/.idea
+static/**
+static/*
