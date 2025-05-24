@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "8012:80"
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "8011:8000"
+    depends_on:
+      - frontend
+volumes:
+  backend:
+  frontend:
