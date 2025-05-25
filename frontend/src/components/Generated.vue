@@ -11,7 +11,7 @@ import { drawFouls } from '@/functions/PDF/drawFouls.ts'
 import { drawGoalKeeps } from '@/functions/PDF/drawGoalKeeps.ts'
 import { drawTrainers } from '@/functions/PDF/drawTrainers.ts'
 
-const pdfUrl = '/site/pdf.pdf';
+const pdfUrl = '/pdf.pdf';
 const editedPdfUrl = ref('');
 
 const mainDataStore = useMainData();

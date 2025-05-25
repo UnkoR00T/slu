@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useMainData } from '@/stores/mainDataStore.ts'
 import type { mainGameType } from '@/types/mainGameType.ts'
-import { ref } from 'vue'
+import {type Ref, ref} from 'vue'
 
 const mainDataStore = useMainData()
 const router = useRouter();
+const toast = useToast();
+const version: Ref<{header: string, msg: string}> = ref({header: "", msg: ""});
 
 const exportData = () => {
   mainDataStore.data.download().then(() => {})
@@ -36,6 +38,8 @@ const importData = () => {
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import authService from '@/functions/api/auth.service.ts'
+import {useToast} from "@/stores/toastController.ts";
+import {versionApi} from "@/functions/api/version.service.ts";
 
 const { locale } = useI18n()
 
@@ -50,6 +54,18 @@ router.beforeEach((to, from, next) => {
   })
 })
 authService.verify().then(() => {})
+const clearData = () => {
+  if (confirm("Are you 100% sure you want to do that?")){
+    localStorage.removeItem("mainData");
+    toast.addToast("Data removed. Refresh page to see effect.");
+  }
+}
+
+versionApi.getVersionMessage().then(res => {
+  version.value = res;
+  document.getElementById('version_modal').showModal();
+})
+
 </script>
 
 <template>
@@ -100,6 +116,9 @@ authService.verify().then(() => {})
           <li>
             <RouterLink to="/generated">{{ $t('navbar.pdf') }}</RouterLink>
           </li>
+          <li @click="clearData()">
+            <p>{{ $t('navbar.clear') }}</p>
+          </li>
         </ul>
       </div>
       <div class="navbar-end">
@@ -140,6 +159,18 @@ authService.verify().then(() => {})
     <div class="p-3">
       <RouterView />
     </div>
+    <dialog id="version_modal" class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">{{version.header}}</h3>
+        <p class="py-4" v-html="version.msg.replace(/\n/g, '<br>')"></p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
   </main>
 </template>
 <style scoped>
