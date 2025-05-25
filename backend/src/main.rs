@@ -16,7 +16,7 @@ fn rocket() -> _ {
     dotenv().ok();
     rocket::build()
     .attach(CORS)
-    .mount("/", rocket::routes![
+    .mount("/api", rocket::routes![
         cors::preflight_cors,
         login::login,
         verify::verify,
