@@ -13,7 +13,8 @@
     "none": "None",
     "actions": "Actions",
     "autosaved": "The data has been automatically saved in the browser's memory. The next save will occur in 2 minutes.",
-    "saved": "The data has been saved in the browser's memory."
+    "saved": "The data has been saved in the browser's memory.",
+    "beta": "This is a test version! There may be bugs. Please report any problems or inconveniences to the site creator."
   },
   "codes": {
     "powerplay": "PP - Power play",
@@ -69,7 +70,8 @@
     "goals": "Goals",
     "goalkeep": "Goalkeep",
     "pdf": "PDF",
-    "fouls": "Fouls"
+    "fouls": "Fouls",
+    "clear": "Clear"
   },
   "infotab": {
     "gameinfo": "Game informations",

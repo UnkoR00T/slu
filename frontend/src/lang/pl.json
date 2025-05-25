@@ -13,7 +13,8 @@
     "none": "Brak",
     "actions": "Akcje",
     "autosaved": "Dane zostały automatycznie zapisane w pamięci przeglądarki. Kolejny zapis nastąpi za 2 minuty.",
-    "saved": "Dane zostały zapisane w pamięci przeglądarki."
+    "saved": "Dane zostały zapisane w pamięci przeglądarki.",
+    "beta": "To jest wersja testowa! Mogą występować błędy. Wszelkiego rodzaju niedogodności należy zgłaszać do autora strony."
   },
   "codes": {
     "powerplay": "PP - Gra w przewadze",
@@ -69,7 +70,8 @@
     "goals": "Bramki",
     "goalkeep": "Bramkarze",
     "pdf": "PDF",
-    "fouls": "Kary"
+    "fouls": "Kary",
+    "clear": "Wyczyść"
   },
   "infotab": {
     "gameinfo": "Informacje o meczu",
