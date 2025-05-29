@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import messages from './lang'
 import { createI18n } from 'vue-i18n'
+import { setupPlausible } from './plugins/plausible.ts'
 
 const app = createApp(App)
 const i18n = createI18n({
@@ -16,5 +17,7 @@ const i18n = createI18n({
 app.use(createPinia())
 app.use(i18n)
 app.use(router)
+
+setupPlausible(app);
 
 app.mount('#app')
