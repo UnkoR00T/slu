@@ -7,6 +7,7 @@ function setupPlausible(app: App<Element>) {
   if (import.meta.env.PROD) {
     plausible = Plausible({
       domain: 'slu.joltamp.pl',
+      apiHost: 'https://plausible.joltamp.pl'
     })
     plausible.enableAutoPageviews()
     plausible.enableAutoOutboundTracking()
