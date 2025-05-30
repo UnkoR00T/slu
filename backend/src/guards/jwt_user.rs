@@ -2,11 +2,13 @@ use jsonwebtoken::{decode, Algorithm, DecodingKey, Validation};
 use rocket::http::Status;
 use rocket::Request;
 use rocket::request::{FromRequest, Outcome};
+use tracing::error;
+use uuid::Uuid;
 use crate::functions::jwt_secret::get_jwt_secret;
 use crate::types::claims::Claims;
 
 pub struct JwtUser {
-    pub user_id: String,
+    pub user_id: Uuid,
 }
 
 #[rocket::async_trait]
@@ -23,7 +25,10 @@ impl<'r> FromRequest<'r> for JwtUser {
                 Ok(token_data) => Outcome::Success(JwtUser {
                     user_id: token_data.claims.sub,
                 }),
-                Err(_) => Outcome::Error((Status::Unauthorized, ())),
+                Err(_) => {
+                    error!("Failed to decode JWT token!");
+                    Outcome::Error((Status::Unauthorized, ()))
+                },
             }
         } else {
             Outcome::Error((Status::Unauthorized, ()))

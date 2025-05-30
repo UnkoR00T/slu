@@ -10,8 +10,7 @@ services:
     restart: always
     ports:
       - "8011:8000"
+    volumes:
+      - /var/log/slu/:/logs/
     depends_on:
       - frontend
-volumes:
-  backend:
-  frontend:
