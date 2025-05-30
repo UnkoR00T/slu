@@ -11,6 +11,6 @@ services:
     ports:
       - "8011:8000"
     volumes:
-      - /var/log/slu-backend.log:/logs/slu-backend.log
+      - /var/log/slu/:/logs/
     depends_on:
       - frontend
