@@ -17,10 +17,12 @@ mod db_init;
 #[rocket::launch]
 async fn rocket() -> _ {
 
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .with_writer(std::fs::File::create("/logs/slu-backend.log").unwrap())
-        .init();
+    if (!cfg!(debug_assertions)) {
+        tracing_subscriber::fmt()
+            .with_env_filter("info")
+            .with_writer(std::fs::File::create("/var/log/slu/slu-backend.log").unwrap())
+            .init();
+    }
     info!("Tracing setup complete!");
 
     info!("Seting up .env");
