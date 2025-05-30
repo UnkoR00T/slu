@@ -9,7 +9,7 @@ use mongodb::bson::Document;
 use rocket::http::Status;
 use rocket::response::status;
 use rocket::State;
-use tracing::info;
+use tracing::{error, info};
 use uuid::Uuid;
 use crate::functions::jwt_secret::get_jwt_secret;
 use crate::types::claims::Claims;
@@ -34,6 +34,14 @@ pub async fn login(input: Json<TokenInput>, db: &State<Database>) -> Result<Stri
         id: None,
         user_id: input.token
     };
-    collection.insert_one(user, None).await.unwrap();
-    Ok(encode(&Header::default(), &claims, &EncodingKey::from_secret(secret.as_bytes())).unwrap())
+    let req = collection.insert_one(user, None).await;
+    match req {
+        Ok(_) => {
+            Ok(encode(&Header::default(), &claims, &EncodingKey::from_secret(secret.as_bytes())).unwrap())
+        }
+        Err(e) => {
+            error!("DBQueryError - Failed to insert data.");
+            Err(Status::InternalServerError)
+        }
+    }
 }
