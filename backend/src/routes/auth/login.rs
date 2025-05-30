@@ -41,6 +41,7 @@ pub async fn login(input: Json<TokenInput>, db: &State<Database>) -> Result<Stri
         }
         Err(e) => {
             error!("DBQueryError - Failed to insert data.");
+            info!(e);
             Err(Status::InternalServerError)
         }
     }
