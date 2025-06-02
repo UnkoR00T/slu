@@ -17,3 +17,5 @@ mongodb = { version = "2.8.0", default-features = false, features = ["tokio-runt
 uuid = {version = "1.13.2"}
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+prometheus = "0.14.0"
+rocket_prometheus = "0.10.1"

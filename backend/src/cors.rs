@@ -1,4 +1,4 @@
-use rocket::{Request, Response, fairing::{Fairing, Info, Kind}, options};
+use rocket::{Request, Response, fairing::{Fairing, Info, Kind}, options, Data};
 use rocket::http::Status;
 
 pub struct CORS;
