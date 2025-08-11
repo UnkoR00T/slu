@@ -7,22 +7,31 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
     if(index >= 25){
       return;
     }
+
+    function getFirstOffset(index: number) {
+      return 3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0)
+    }
+
+    function getSecondOffset(index2: number) {
+      return 3.9 * index2 - (index2 > 2 ? 0.7 : 0) - (index2 > 13 ? 1.2 : 0)
+    }
+
     if (index <= 19){
       page.drawText((index + 1).toString(), {
-        ...getCords(187, 28+ (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
+        ...getCords(187, 28+ getFirstOffset(index)),
         size: 7,
         font,
         color: rgb(0, 0, 0)
       });
       page.drawText(goal.time.toString(), {
-        ...getCords(197, 28+ (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
+        ...getCords(197, 28+ getFirstOffset(index)),
         size: 7,
         font,
         color: rgb(0, 0, 0)
       });
       if(goal.playerId){
         page.drawText(goal.playerId.toString(), {
-          ...getCords(210, 28+ (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
+          ...getCords(210, 28+ getFirstOffset(index)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -30,7 +39,7 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
       }
       if(goal.assistId){
         page.drawText(goal.assistId.toString(), {
-          ...getCords(219, 28+ (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
+          ...getCords(219, 28+ getFirstOffset(index)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -38,7 +47,7 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
       }
       if(goal.code){
         page.drawText(goal.code.toString(), {
-          ...getCords(229, 28+ (3.9 * index - (index > 2 ? 0.7 : 0) - (index > 13 ? 1.2 : 0))),
+          ...getCords(229, 28+ getFirstOffset(index)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -47,20 +56,20 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
     }else{
       const index2 = index - 20;
       page.drawText((index + 1).toString(), {
-        ...getCords(240, 28+ (3.9 * index2 - (index2 > 2 ? 0.7 : 0) - (index2 > 13 ? 1.2 : 0))),
+        ...getCords(240, 28+ getSecondOffset(index2)),
         size: 7,
         font,
         color: rgb(0, 0, 0)
       });
       page.drawText(goal.time.toString(), {
-        ...getCords(250, 28+ (3.9 * index2 - (index2 > 2 ? 0.7 : 0) - (index2 > 13 ? 1.2 : 0))),
+        ...getCords(250, 28+ getSecondOffset(index2)),
         size: 7,
         font,
         color: rgb(0, 0, 0)
       });
       if(goal.playerId){
         page.drawText(goal.playerId.toString(), {
-          ...getCords(260, 28+ (3.9 * index2 - (index2 > 2 ? 0.7 : 0) - (index2 > 13 ? 1.2 : 0))),
+          ...getCords(260, 28+ getSecondOffset(index2)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -68,7 +77,7 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
       }
       if(goal.assistId){
         page.drawText(goal.assistId.toString(), {
-          ...getCords(270, 28+ (3.9 * index2 - (index2 > 2 ? 0.7 : 0) - (index2 > 13 ? 1.2 : 0))),
+          ...getCords(270, 28+ getSecondOffset(index2)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -76,7 +85,7 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
       }
       if(goal.code){
         page.drawText(goal.code.toString(), {
-          ...getCords(280, 28+ (3.9 * index2 - (index2 > 2 ? 0.7 : 0) - (index2 > 13 ? 1.2 : 0))),
+          ...getCords(280, 28+ getSecondOffset(index2)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -88,22 +97,31 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
     if(index >= 25){
       return;
     }
+
+    function getThirdOffset(index: number) {
+      return 3.9 * index - (index > 2 ? 0.1 : 0) - (index > 11 ? 1.5 : 0)
+    }
+
+    function getFourthOffset(index2: number) {
+      return 3.9 * index2 - (index2 > 2 ? 0.1 : 0) - (index2 > 11 ? 1.5 : 0)
+    }
+
     if (index <= 19) {
       page.drawText((index + 1).toString(), {
-        ...getCords(187, 119.5+ (3.9 * index - (index > 2 ? 0.1 : 0) - (index > 11 ? 1.5 : 0))),
+        ...getCords(187, 119.5+ getThirdOffset(index)),
         size: 7,
         font,
         color: rgb(0, 0, 0)
       });
       page.drawText(goal.time.toString(), {
-        ...getCords(197, 119.5+ (3.9 * index - (index > 2 ? 0.1 : 0) - (index > 11 ? 1.5 : 0))),
+        ...getCords(197, 119.5+ getThirdOffset(index)),
         size: 7,
         font,
         color: rgb(0, 0, 0)
       });
       if(goal.playerId){
         page.drawText(goal.playerId.toString(), {
-          ...getCords(210, 119.5+ (3.9 * index - (index > 2 ? 0.1 : 0) - (index > 11 ? 1.5 : 0))),
+          ...getCords(210, 119.5+ getThirdOffset(index)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -111,7 +129,7 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
       }
       if(goal.assistId){
         page.drawText(goal.assistId.toString(), {
-          ...getCords(219, 119.5+ (3.9 * index - (index > 2 ? 0.1 : 0) - (index > 11 ? 1.5 : 0))),
+          ...getCords(219, 119.5+ getThirdOffset(index)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -119,7 +137,7 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
       }
       if(goal.code){
         page.drawText(goal.code.toString(), {
-          ...getCords(229, 119.5+ (3.9 * index - (index > 2 ? 0.1 : 0) - (index > 11 ? 1.5 : 0))),
+          ...getCords(229, 119.5+ getThirdOffset(index)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -128,20 +146,20 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
     }else{
       const index2 = index - 20;
       page.drawText((index + 1).toString(), {
-        ...getCords(240, 119.5+ (3.9 * index2 - (index2 > 2 ? 0.1 : 0) - (index2 > 11 ? 1.5 : 0))),
+        ...getCords(240, 119.5+ getFourthOffset(index2)),
         size: 7,
         font,
         color: rgb(0, 0, 0)
       });
       page.drawText(goal.time.toString(), {
-        ...getCords(250, 119.5+ (3.9 * index2 - (index2 > 2 ? 0.1 : 0) - (index2 > 11 ? 1.5 : 0))),
+        ...getCords(250, 119.5+ getFourthOffset(index2)),
         size: 7,
         font,
         color: rgb(0, 0, 0)
       });
       if(goal.playerId){
         page.drawText(goal.playerId.toString(), {
-          ...getCords(260, 119.5+ (3.9 * index2 - (index2 > 2 ? 0.1 : 0) - (index2 > 11 ? 1.5 : 0))),
+          ...getCords(260, 119.5+ getFourthOffset(index2)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -149,7 +167,7 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
       }
       if(goal.assistId){
         page.drawText(goal.assistId.toString(), {
-          ...getCords(270, 119.5+ (3.9 * index2 - (index2 > 2 ? 0.1 : 0) - (index2 > 11 ? 1.5 : 0))),
+          ...getCords(270, 119.5+ getFourthOffset(index2)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
@@ -157,7 +175,7 @@ const drawGoals = (page: PDFPage, data: mainGameType, font: PDFFont) => {
       }
       if(goal.code){
         page.drawText(goal.code.toString(), {
-          ...getCords(280, 119.5+ (3.9 * index2 - (index2 > 2 ? 0.1 : 0) - (index2 > 11 ? 1.5 : 0))),
+          ...getCords(280, 119.5+ getFourthOffset(index2)),
           size: 7,
           font,
           color: rgb(0, 0, 0)
